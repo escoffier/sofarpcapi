@@ -21,18 +21,18 @@ public class Server {
                 .setProtocol("zookeeper")
                 .setAddress("192.168.21.241:2181");
 
-        Class c = registryConfig.getClass();
-        Class[] cArg = new Class[1];
-        cArg[0] = RegistryConfig.class;
-
-        try {
-            Constructor constructor = c.getConstructor( cArg);
-        }  catch(NoSuchMethodException e) {
-            System.out.println(e.toString());
-        }
-        catch(SecurityException e) {
-            System.out.println(e.toString());
-        }
+//        Class c = registryConfig.getClass();
+//        Class[] cArg = new Class[1];
+//        cArg[0] = RegistryConfig.class;
+//
+//        try {
+//            Constructor constructor = c.getConstructor( cArg);
+//        }  catch(NoSuchMethodException e) {
+//            System.out.println(e.toString());
+//        }
+//        catch(SecurityException e) {
+//            System.out.println(e.toString());
+//        }
 
         //ZookeeperRegistry zookeeperRegistry = new ZookeeperRegistry();
 
@@ -48,6 +48,8 @@ public class Server {
                 .setRef(new HelloServiceImpl())
                 .setServer(serverConfig)
                 .setRegistry(registryConfig);
+
+        providerConfig.getApplication().setAppName("apiserver");
 
         providerConfig.export();
         LOGGER.warn("started at pid {}", RpcRuntimeContext.PID);
